@@ -31,6 +31,7 @@
 	NSUInteger _pageIndexBeforeRotation;
 	
 	// Navigation & controls
+    BOOL isSubview;
 	UIToolbar *_toolbar;
 	NSTimer *_controlVisibilityTimer;
 	UIBarButtonItem *_previousButton, *_nextButton, *_actionButton, *_doneButton;

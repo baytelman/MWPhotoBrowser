@@ -227,7 +227,7 @@
             [_doneButton setTitleTextAttributes:[NSDictionary dictionary] forState:UIControlStateHighlighted];
         }
         self.navigationItem.rightBarButtonItem = _doneButton;
-    } else {
+    } else if ([self.navigationController.viewControllers containsObject:self]) {
         // We're not first so show back button
         UIViewController *previousViewController = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
         NSString *backButtonTitle = previousViewController.navigationItem.backBarButtonItem ? previousViewController.navigationItem.backBarButtonItem.title : previousViewController.title;
@@ -243,6 +243,8 @@
         }
         _previousViewControllerBackButton = previousViewController.navigationItem.backBarButtonItem; // remember previous
         previousViewController.navigationItem.backBarButtonItem = newBackButton;
+    } else {
+        isSubview = YES;
     }
 
     // Toolbar items

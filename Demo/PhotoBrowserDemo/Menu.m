@@ -23,7 +23,7 @@
         [[SDImageCache sharedImageCache] clearDisk];
         [[SDImageCache sharedImageCache] clearMemory];
         
-        _segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Push", @"Modal", nil]];
+        _segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Push", @"Modal", @"Subview",nil]];
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
         if (SYSTEM_VERSION_LESS_THAN(@"7")) {
             _segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
@@ -1060,11 +1060,14 @@
     if (_segmentedControl.selectedSegmentIndex == 0) {
         // Push
         [self.navigationController pushViewController:browser animated:YES];
-    } else {
+    } else if (_segmentedControl.selectedSegmentIndex == 1) {
         // Modal
         UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:browser];
         nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self presentViewController:nc animated:YES completion:nil];
+    } else {
+        [self addChildViewController:browser];
+        [self.view addSubview:browser.view];
     }
     
     // Release
